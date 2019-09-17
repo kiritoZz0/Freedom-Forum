@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zero.mapper.PostsMapper">   
+
+   <resultMap type="com.zero.pojo.Posts" id="findMyTie">
+      <!-- id标签用来代表表中的主键 column中填数据库表的字段名  property中
+                     填对应的pojo类的属性 -->
+      <id column="pid" property="pid"/>
+      <!-- result代表普通标签 -->
+      <result column="user_id" property="user_id"/>
+      <result column="board_id" property="board_id"/>
+      <result column="posttitle" property="posttitle"/>
+      <result column="posttime" property="posttime"/>
+      <result column="postheat" property="postheat"/>
+      <result column="posttype" property="posttype"/>    
+   </resultMap>
+   
+   <select id="getMyTie" resultMap="findMyTie">  
+   	select posttitle,posttime from tb_posts 
+   </select>
+   
+   
+   <resultMap type="com.zero.pojo.Posts" id="findAllPosts">
+      <!-- id标签用来代表表中的主键 column中填数据库表的字段名  property中
+                     填对应的pojo类的属性 -->
+      <id column="pid" property="pid"/>
+      <!-- result代表普通标签 -->
+      <result column="user_id" property="user_id"/>
+      <result column="board_id" property="board_id"/>
+      <result column="posttitle" property="posttitle"/> 
+      <result column="posttime" property="posttime"/>
+   </resultMap>
+
+   <select id="selectAllPosts" resultMap="findAllPosts">
+       select * from tb_posts
+   </select>
+
+   <delete id="deletePosts" parameterType="Integer">
+       DELETE FROM tb_posts WHERE pid =#{pid}
+   </delete>
+   
+   
+      <insert id="savePost" parameterType="com.zero.pojo.Posts" keyProperty="pid">
+    
+    INSERT INTO tb_posts
+(
+pid,
+user_id,
+board_id,
+posttitle,
+posttime,
+postcontent,
+posttype
+)
+VALUES
+(
+#{pid},
+#{user_id},
+#{board_id},
+#{posttitle},
+#{posttime},
+#{postcontent},
+#{posttype}
+)
+
+   </insert>
+   
+</mapper>

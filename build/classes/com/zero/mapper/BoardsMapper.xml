@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zero.mapper.BoardsMapper">
+
+<!--自定义结果集  -->
+   <resultMap type="com.zero.pojo.Boards" id="findAllBoards">
+      <!-- id标签用来代表表中的主键 column中填数据库表的字段名  property中
+                     填对应的pojo类的属性 -->
+      <id column="bid" property="bid"/>
+      <!-- result代表普通标签 -->
+      <result column="user_id" property="user_id"/>
+      <result column="boardclassfication" property="boardclassfication"/>
+      <result column="boardname" property="boardname"/>
+      <result column="boardintroduction" property="boardintroduction"/> 
+      <result column="boardimage" property="boardimage"/>
+   </resultMap>
+
+   <select id="selectAll" resultMap="findAllBoards">
+       select * from tb_boards 
+   </select>
+     
+   <delete id="delectBoards" parameterType="Integer">
+       DELETE FROM tb_boards WHERE bid =#{bid}
+   </delete>
+
+</mapper>
